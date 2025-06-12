@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "nodemon test.js"
+    "start": "nodemon test.js"
   },
   "dependencies": {
     "http": "^0.0.1-security"
