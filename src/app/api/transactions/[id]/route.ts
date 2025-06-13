@@ -6,7 +6,6 @@ type Params = {
     id: string;
   };
 };
-
 export async function GET(request: Request, { params }: Params) {
   const { id } = await params;
   const { data, error } = await supabase
@@ -21,10 +20,31 @@ export async function GET(request: Request, { params }: Params) {
     data,
   });
 }
+//get id
+//get exciting transaction
+//check the ammount if the same
 export async function PUT(request: Request, { params }: Params) {
   const id = params.id;
   const requestBody = await request.json();
   console.log("requestBody", requestBody.amount);
+
+  // get the existing data from supabase
+  const result = await supabase
+    .from("transactions")
+    .select()
+    .eq("id", id)
+    .single();
+  const existingData = result.data;
+  console.log(existingData);
+  const existingAmount = existingData.amount;
+  const newAmount = requestBody.amount;
+  console.log(newAmount, existingAmount);
+  if (newAmount === existingAmount) {
+    return NextResponse.json({ error: "Already Updated" }, { status: 400 });
+  }
+
+  // compare the ammout is same form request body vs data supabase
+
   const { data, error } = await supabase
     .from("transactions")
     .update({
@@ -38,6 +58,7 @@ export async function PUT(request: Request, { params }: Params) {
   if (error) {
     return NextResponse.json({ error: "walang mahanap" }, { status: 404 });
   }
+
   return NextResponse.json({
     data,
   });
