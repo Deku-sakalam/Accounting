@@ -25,11 +25,7 @@ export const validateTransaction = (transaction: Transaction) => {
   }
   // retained income = (revenue - expenses)
   const retainedIncome = totalRevenue - totalExpenses;
-  console.log(retainedIncome);
-  // equity = retained income + beginning equity
   const finalEquity = retainedIncome + totalEquity;
-  console.log(finalEquity);
-  // equity + liabilities +  = asset
   if (finalEquity + totalLiabilities !== totalAsset) {
     throw new Error("hindi balance");
   }

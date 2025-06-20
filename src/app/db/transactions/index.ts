@@ -1,6 +1,5 @@
 import supabase from "@/app/lib/supabase";
 
-
 export const GetAll = async () => {
   return await supabase.from("transactions").select();
 };
@@ -9,22 +8,19 @@ export const GetSingle = async (id: string) => {
 };
 
 type Transaction = {
-  amount :number
-  sender_name: string
-  receiver_name : string
-  status: string
-}
-export const CreateTransaction = async (transaction:Transaction) => {
-  return await supabase
-  .from("transactions")
-  .insert(transaction)
-  .select();
-} 
+  amount: number;
+  sender_name: string;
+  receiver_name: string;
+  status: string;
+};
+export const CreateTransaction = async (transaction: Transaction) => {
+  return await supabase.from("transactions").insert(transaction).select();
+};
 
 const transactions = {
   GetAll,
   GetSingle,
-  CreateTransaction
+  CreateTransaction,
 };
 
 export default transactions;
