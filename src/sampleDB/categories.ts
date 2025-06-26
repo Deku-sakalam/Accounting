@@ -1,6 +1,6 @@
 import { Category } from "@/types/transaction";
 
-export const categories: Category[] = [
+export const categoriesDB: Category[] = [
   {
     name: "Asset",
     parent: null,

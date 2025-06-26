@@ -6,10 +6,10 @@ export const validateTransaction = (transaction: Transaction) => {
 
   const totalCredits = [];
   for (let i = 0; i < transaction.length; i++) {
-    if (transaction[i].name === "debit") {
+    if (transaction[i].categoryId === "debit") {
       totalDebits.push(transaction[i].amount);
     }
-    if (transaction[i].name === "credit") {
+    if (transaction[i].categoryId === "credit") {
       totalCredits.push(transaction[i].amount);
     }
   }

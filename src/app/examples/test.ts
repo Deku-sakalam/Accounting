@@ -1,8 +1,7 @@
-import { output } from "@/types/transaction";
+import { TestAll } from "@/test/testAll";
 
 const test = () => {
-  return output;
-  // return validateTransaction(sampleData);
+  return TestAll();
 };
 
 export default test;

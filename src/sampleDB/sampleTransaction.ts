@@ -5,22 +5,22 @@ import { validatedTransactionCategory } from "@/validations/ValidatedTransaction
 export const sampleTransaction: Transaction = validateTransaction([
   validatedTransactionCategory({
     amount: 500 - 300 + 300 + 500 - 300,
-    name: "Asset",
+    categoryId: "Asset",
   }),
   validatedTransactionCategory({
     amount: 500,
-    name: "Equity",
+    categoryId: "Equity",
   }),
   validatedTransactionCategory({
     amount: 100,
-    name: "Liabilities",
+    categoryId: "Liabilities",
   }),
   validatedTransactionCategory({
     amount: 100,
-    name: "Revenue",
+    categoryId: "Revenue",
   }),
   validatedTransactionCategory({
     amount: 0,
-    name: "Expenses",
+    categoryId: "Expenses",
   }),
 ]);

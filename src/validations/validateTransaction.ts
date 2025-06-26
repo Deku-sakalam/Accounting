@@ -1,4 +1,22 @@
-import { Transaction } from "@/types/transaction";
+import { categoriesDB } from "@/sampleDB/categories";
+import { Category, Transaction } from "@/types/transaction";
+
+export const findCategory = (currentCategoryName: string): Category => {
+  let cat = null;
+  for (let i = 0; i < categoriesDB.length; i++) {
+    if (currentCategoryName === categoriesDB[i].name) {
+      cat = categoriesDB[i];
+    }
+  }
+  if (!cat) {
+    throw Error("hindi mahanap ang category");
+  }
+  if (cat.parent != null) {
+    cat = findCategory(cat.parent);
+  }
+  return cat;
+};
+
 export const validateTransaction = (transaction: Transaction) => {
   let totalRevenue = 0;
   let totalExpenses = 0;
@@ -7,19 +25,23 @@ export const validateTransaction = (transaction: Transaction) => {
   let totalAsset = 0;
 
   for (let i = 0; i < transaction.length; i++) {
-    if (transaction[i].name === "Revenue") {
+    const currentCategoryName = transaction[i].categoryId;
+    const currentCategory = findCategory(currentCategoryName);
+    const baseCategoriesNames = currentCategory?.parent;
+
+    if (baseCategoriesNames === "Revenue") {
       totalRevenue += transaction[i].amount;
     }
-    if (transaction[i].name === "Expenses") {
+    if (baseCategoriesNames === "Expenses") {
       totalExpenses += transaction[i].amount;
     }
-    if (transaction[i].name === "Equity") {
+    if (baseCategoriesNames === "Equity") {
       totalEquity += transaction[i].amount;
     }
-    if (transaction[i].name === "Liabilities") {
+    if (baseCategoriesNames === "Liabilities") {
       totalLiabilities += transaction[i].amount;
     }
-    if (transaction[i].name === "Asset") {
+    if (baseCategoriesNames === "Asset") {
       totalAsset += transaction[i].amount;
     }
   }
