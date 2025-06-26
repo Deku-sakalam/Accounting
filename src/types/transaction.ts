@@ -1,7 +1,7 @@
 export type Category = {
   id: string;
-  name: string;
-  parent_id: string | null | BaseCategoryName;
+  name: string | BaseCategoryName;
+  parent_id: string;
 };
 export type Transaction = {
   id: string;
@@ -28,4 +28,5 @@ export type BaseCategoryName =
 export type DataBase = {
   categories: Category[];
   transactionCategories: TransactionCategory[];
+  transactions: Transaction[];
 };
