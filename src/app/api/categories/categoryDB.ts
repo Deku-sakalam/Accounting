@@ -23,4 +23,7 @@ export const CategoryDB = {
       .eq("id", id)
       .select();
   },
+  delete: async (id: string) => {
+    return await supabase.from("categories").delete().eq("id", id);
+  },
 };

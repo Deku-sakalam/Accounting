@@ -68,7 +68,7 @@ export async function DELETE(request: Request, { params }: Params) {
     .eq("id", id)
     .select();
   console.log(data);
-  if (error) {
+  if (error) {  
     return NextResponse.json({ error: "walang mahanap" }, { status: 404 });
   }
   if (!data || !data.length) {

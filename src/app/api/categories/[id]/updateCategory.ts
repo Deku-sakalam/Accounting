@@ -11,9 +11,9 @@ export async function UpdateCategory(request: Request, { params }: Params) {
   // get id on data base
   const { data: existingData } = await CategoryDB.getByID(id);
   console.log("existingData", existingData);
-  if (baseCategoryHandles.includes(handleize(existingData.handle))) {
+  if (baseCategoryHandles.includes(existingData.handle)) {
     return NextResponse.json(
-      { error: "Error: bawal dahil existing category na siya" },
+      { error: "Error: bawal baguhin ang basecategory" },
       { status: 409 }
     );
   }
@@ -25,5 +25,17 @@ export async function UpdateCategory(request: Request, { params }: Params) {
     parent_id: requestBody.parent_id,
     handle: handleize(requestBody.name),
   });
+  if (existingData.handle === handleize(requestBody.name)) {
+    return NextResponse.json({ error: "Already Updated" }, { status: 400 });
+  }
+  if (error) {
+    if (error.code === "23505") {
+      return NextResponse.json(
+        { error: "Error Duplicate notice" },
+        { status: 403 }
+      );
+    }
+    console.error(error, requestBody);
+  }
   return NextResponse.json(data);
 }
