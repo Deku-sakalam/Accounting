@@ -12,7 +12,5 @@ export async function getCategory(request: Request, { params }: Params) {
   if (error) {
     return NextResponse.json({ error: "walang mahanap" }, { status: 404 });
   }
-  return NextResponse.json({
-    data,
-  });
+  return NextResponse.json(data);
 }

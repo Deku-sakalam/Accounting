@@ -9,7 +9,7 @@ type Params = {
 };
 export async function GET(request: Request, { params }: Params) {
   const { id } = await params;
-  const { data, error } = await transactionsDB.GetSingle(id)
+  const { data, error } = await transactionsDB.GetSingle(id);
   if (error) {
     return NextResponse.json({ error: "walang mahanap" }, { status: 404 });
   }

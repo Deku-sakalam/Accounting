@@ -2,6 +2,7 @@ export type Category = {
   id: string;
   name: string | BaseCategoryName;
   parent_id: string;
+  handle: string;
 };
 export type Transaction = {
   id: string;
